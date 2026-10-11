@@ -1,23 +1,23 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import VideoModule from './VideoModule';
 
 import logo from '../assets/images/webcafe-logo.png';
 import heroImage from '../assets/images/webcafe-hero.png';
 
 const Header = () => {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+
   return (
     <header className="header">
-      {/* Website logo */}
       <nav className="navbar">
-        <a href="/" className="logo">
+        <a href="/" className="logo" aria-label="WebCafe home">
           <img src={logo} alt="WebCafe AI Logo" />
         </a>
       </nav>
 
-      {/* Main hero section */}
       <div className="header-content">
-        {/* Left side: text and button */}
         <div className="header-left">
           <h1>
             Build smarter
@@ -32,15 +32,12 @@ const Header = () => {
 
           <button
             className="primary-button"
-            onClick={() => {
-              alert('Welcome to WebCafe AI!');
-            }}
+            onClick={() => setIsVideoOpen(true)}
           >
             Get Started <span>→</span>
           </button>
         </div>
 
-        {/* Right side: hero illustration */}
         <div className="header-right">
           <img
             src={heroImage}
@@ -49,6 +46,11 @@ const Header = () => {
           />
         </div>
       </div>
+
+      <VideoModule
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+      />
     </header>
   );
 };
